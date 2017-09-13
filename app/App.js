@@ -1,13 +1,12 @@
-'use strict';
-
 import React, { Component } from 'react'
 import QRCode from 'react-native-qrcode'
 import { StyleSheet, View, TextInput } from 'react-native'
+import PromptPayQR from './promptpay-qr'
 
 class App extends Component {
 
     state = {
-        text: 'Helloworld',
+        text:   null,
         acc_id: '',
         amount: '',
     }
@@ -21,14 +20,8 @@ class App extends Component {
         this.render_qr();
     }
     render_qr(){
-        // TODO
-        let text = this.state.acc_id + this.state.amount;
-        //
-        this.setState({
-            text:   text,
-            acc_id: this.state.acc_id,
-            amount: this.state.amount,
-        })
+        let text = PromptPayQR.gen_text(this.state.acc_id, this.state.amount);
+        this.setState({ text })
     }
 
     render() {
@@ -46,13 +39,20 @@ class App extends Component {
                     placeholder="จำนวนเงิน (ไม่ระบุก็ได้)"
                     onChangeText={ (text) => this.set_amount(text) }
                 />
-                <QRCode
-                    value={this.state.text}
-                    size={300}
-                    bgColor='black'
-                    fgColor='white'
-                />
-            </View>
+                {
+                    this.state.text ? (
+                        <QRCode
+                                value={this.state.text}
+                                size={300}
+                                bgColor='black'
+                                fgColor='white'
+                            />
+
+                    ) : (
+                        <View />
+                    )
+                }
+             </View>
         )
     }
 }

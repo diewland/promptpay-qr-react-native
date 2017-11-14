@@ -6,3 +6,4 @@ Learn to build PromptPay QR by React Native
 * https://www.blognone.com/node/95311
 * https://www.blognone.com/node/95530
 * http://www.truemoney.com/promptpay-aom
+* https://www.blognone.com/node/97186
